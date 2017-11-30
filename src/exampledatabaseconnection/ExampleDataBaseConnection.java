@@ -39,6 +39,21 @@ public class ExampleDataBaseConnection {
             sql = "insert into members (LName, FName, Tel1, Tel2) values ('FOUNTOUKIDOU', 'IOANNA', '6982545793', '2145698726')";
             stmt = conn.createStatement(); // to vazoume ksana. ekleise to apo panw molis ektelestike h select *
             int i = stmt.executeUpdate(sql);
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Give me your last name: ");
+            String lastname = scanner.next();
+            System.out.println("Give me your first name: ");
+            String firstname = scanner.next();
+            sql = "SELECT * FROM members WHERE LName= '" + lastname + "' and FName = '" + firstname+ "'";
+            rs = stmt.executeQuery(sql);
+          
+            
+            sql = "CREATE TABLE `katalogos`.`birthdays` ("
+                    + "`usersid` int(11) not null auto_increment," +
+                    "`bd` varchar(45) not null," + "foreign key (`usersid`) references members(`ID`))" + 
+                    "ENGINE = InnoDB DEFAULT CHARACTER SET = utf8";
+            stmt = conn.createStatement();
+            int i = stmt.executeUpdate(sql);
             
             while (rs.next()) { 
                 int id = rs.getInt("id");
